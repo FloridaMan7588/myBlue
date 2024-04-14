@@ -15,36 +15,80 @@ modules:
     files:
       - usr: /usr
           # copies config/files/usr into your image's /usr.
-          # put configuration files you want in /etc/ on a booted system 
+          # put configuration files you want in /etc/ on a booted system
           # in /usr/etc/ in the image. read more in files module reference.
 
   - type: rpm-ostree
     repos: # - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-%OS_VERSION%/atim-starship-fedora-%OS_VERSION%.repo
     install:
+      - zsh
+      - waydroid
       # - micro
       # - starship
     remove:
       # example: removing firefox (in favor of the flatpak)
       # "firefox" is the main package, "firefox-langpacks" is a dependency
-      # - firefox
-      # - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+       - firefox
+       - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+       - gnome-help
+       - gnome-tour
+       - htop
+       - nvtop
 
   - type: default-flatpaks
-    notify: true # Send notification after install/uninstall is finished (true/false)
+    notify: false # Send notification after install/uninstall is finished (true/false)
     system:
       # If no repo information is specified, Flathub will be used by default
       # repo-url: https://dl.flathub.org/repo/flathub.flatpakrepo
       # repo-name: flathub
       # repo-title: "Flathub (system-wide)" # Optional; this sets the remote's user-facing name in graphical frontends like GNOME Software
       install:
+        - net.waterfox.waterfox # My dearest browser
+        # Development Stuff
+        - com.visualstudio.code
+        - io.github.shiftkey.Github
+        - md.obsidian.Obsidian
+        # Misc Nonfree stuff
+        - com.spotify.Client
+        - com.discordapp.Discord
+        - org.prismlauncher.PrismLauncher
+        - com.valvesoftware.Steam
+        # Assorted tools
+        - com.github.tchx84.Flatseal
+        - com.mattjakeman.ExtensionManager
         # - org.mozilla.firefox
         # - org.gnome.Loupe
         # - one.ablaze.floorp//lightning # This is an example of flatpak which has multiple branches in selection (flatpak//branch).
         # Flatpak runtimes are not supported (like org.winehq.Wine//stable-23.08),
-
-      # only normal flatpak applications are (like Floorp Lightning web browser in this example).
-      # Installing different branches of the same Flatpak is not supported.
+        # only normal flatpak applications are (like Floorp Lightning web browser in this example).
+        # Installing different branches of the same Flatpak is not supported.
       remove:
-        # - org.gnome.eog
+         - org.mozilla.firefox
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
+  - type: fonts
+    fonts:
+      google-fonts:
+        - Roboto
+        - Open Sans
+        - Raleway
+  - type: gnome-extensions
+    install:
+      # You can tell what kind of desktop experience I like, lol
+      - user-themegnome-shell-extensions.gcampax.github.com.v54
+      - gsconnectandyholmes.github.io.v56
+      - dash-to-paneljderose9.github.com.v60
+      - gtk4-dingsmedius.gitlab.com.v77
+      - weatheroclockCleoMenezesJr.github.io.v11
+      - appindicatorsupportrgcjonas.gmail.com.v57
+  - type: bling
+    install:
+      - laptop
+  - type: akmods
+    base: main
+    install:
+      - openrgb
+      - v4l2loopback
+      - winesync
+      - xpadneo
+      - xonedo
