@@ -91,4 +91,4 @@ modules:
       # - v4l2loopback
       - winesync
       - xpadneo
-      - xonedo
+      # - xonedo
