@@ -88,7 +88,7 @@ modules:
     base: main
     install:
       - openrgb
-      - v4l2loopback
+      # - v4l2loopback
       - winesync
       - xpadneo
       - xonedo
